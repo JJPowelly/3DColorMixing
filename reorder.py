@@ -16,13 +16,16 @@ tn = -1
 # used for storing GCode for each layer labeled by Tn's
 data = {}
 
+# disable the serpentining
+noserp = False
+
 # ascend or descend the order of Tn's
 colorDir = True
 
 # cli args
 opts, extraparams = getopt.getopt(
    sys.argv[1:],
-   'z:f:o:',
+   'z:f:o:s',
    ['zhop', 'infile', 'outfile'])
 for o, p in opts:
    if o in ['-z', '--zhop']:
@@ -31,6 +34,9 @@ for o, p in opts:
       infile = p
    elif o in ['-o', '--outfile']:
       outfile = p
+   elif o in ['-s', '--noserpentine']
+      noserp = True
+
 
 inf = open(infile, 'r')
 ouf = open(outfile, 'w')
@@ -53,7 +59,9 @@ def getValue(line, key, default=None):
 def flushAndSort():
    global colorDir
    global data
-   colorDir = not colorDir
+
+   if not noserp
+      colorDir = not colorDir
    # sort
    keys = sorted(data.keys())
    # reverse every other layer
