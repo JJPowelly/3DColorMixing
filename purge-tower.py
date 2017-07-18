@@ -127,8 +127,8 @@ print('lastz: ', lastz)
 zpos = float(0.0)
 
 for l in lines:
-   ouf.write(l)
    if (zpos > lastz):
+      ouf.write(l)
       continue
    i = l.find(' ')
    if (i == -1):
@@ -146,7 +146,7 @@ for l in lines:
       if (newz != -1 and newz - zpos < zhop - 0.01 and newz != zpos):
          if (zpos == 0):
             zpos = newz
-         else:
+         elif (zpos > 0):
             # new layer here
             for i in list(range(maxSwaps-swaps)):
                drawNextTower()
@@ -159,4 +159,6 @@ for l in lines:
       elif (tn != ltn):
          # swap here
          ltn = tn
-         drawNextTower()
+         if (zpos > 0):
+            drawNextTower()
+   ouf.write(l)
