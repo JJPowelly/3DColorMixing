@@ -31,6 +31,8 @@ tn = -1
 
 data = {}
 
+lastz = float(-1.0) # last z pos to draw purge towers at
+
 ltn = -1 # last Tn
 maxSwaps = 0
 swaps = 0
@@ -70,7 +72,6 @@ for (dirpath, dirnames, filenames) in walk(towersPath):
 
 # find max # of times were going to change colors
 for l in lines:
-   ouf.write(l)
    i = l.find(' ')
    if (i == -1):
       gc = l
@@ -89,17 +90,17 @@ for l in lines:
             zpos = newz
          else:
             # new layer here
-            #ouf.write('TNEW '+str(zpos)+' '+str(newz)+'\n')
             print('new layer')
             zpos = newz
             swaps = 0
-            #print('reset')
    elif (gc[0:1] == 'T'):
       tn = int(gc[1:])
       if (ltn == -1):
          ltn = tn
+         lastz = zpos
       elif (tn != ltn):
-         print('new swap', ltn, tn)
+         #print('new swap', ltn, tn)
+         lastz = zpos
          ltn = tn
          swaps += 1
          #print('swap', swaps, l)
@@ -122,9 +123,13 @@ def drawNextTower():
             ouf.write(l)
    swaps += 1
 
+print('lastz: ', lastz)
+zpos = float(0.0)
 
 for l in lines:
    ouf.write(l)
+   if (zpos > lastz):
+      continue
    i = l.find(' ')
    if (i == -1):
       gc = l
@@ -143,11 +148,8 @@ for l in lines:
             zpos = newz
          else:
             # new layer here
-            #ouf.write('TNEW '+str(zpos)+' '+str(newz)+'\n')
             for i in list(range(maxSwaps-swaps)):
                drawNextTower()
-               #for l in towers[i]:
-                  #ouf.write(';asd\n')
             zpos = newz
             swaps = 0
    elif (gc[0:1] == 'T'):
@@ -158,21 +160,3 @@ for l in lines:
          # swap here
          ltn = tn
          drawNextTower()
-         #print('swap', swaps, l)
-
-#for l in lines:
-#   break
-#   i = l.find(' ')
-#   if (i == -1):
-#      gc = l
-#   else:
-#      gc = l[0:i]
-#
-#   if (gc.find(';') != -1):
-#      gc = gc[:gc.find(';')]
-
-   #if (gc[0:1] == 'T' and gc[1:] not in tnList):
-      #tnList[gc] = False
-
-
-
