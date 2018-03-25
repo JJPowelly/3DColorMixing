@@ -1,6 +1,3 @@
-# Jake Mayeux
-# July 2017
-# purge-tower.py
 
 import re
 import sys
