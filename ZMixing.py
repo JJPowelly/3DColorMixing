@@ -1,6 +1,3 @@
-# Jake Mayeux
-# July 2017
-# mixing-v2.py
 
 import re
 import sys
