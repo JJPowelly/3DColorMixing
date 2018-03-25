@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Hello World!</title>
+		<link rel=stylesheet href=style.css>
+	</head>
+
+	<body>
+		<div class=left>
+			<div id=upload class=button>Load GCode</div>
+		</div>
+		<div class=right>
+			<div id=purge class=button>Purge Towers</div>
+			<div id=reorder class=button>Reorder Colors</div>
+			<div id=zmix class=button>ZMixing</div>
+		</div>
+	</body>
+
+	<script>
+	require('./renderer.js')
+	const { exec } = require('child_process');
+	var uploadButton = document.querySelector('#upload')
+	
+	window.ondrop = (e) => {
+		e.preventDefault()
+		for (let f of e.dataTransfer.files) {
+			console.log('File(s) you dragged here: ', f.path)
+		}
+		return false;
+	}
+
+	uploadButton.onclick =()=> {
+		console.log('asdf')
+	}
+
+	</script>
+</html>

@@ -1,0 +1,19 @@
+body{
+	display: flex;
+	width: 70%;
+	flex-direction: row;
+	justify-content: space-between;
+	margin: auto;
+}
+.button{
+	color: #ddd;
+	padding: 5pt;
+	border: 1px 2px 2px solid #222;
+	border-radius: 2px;
+	background-color: #222;
+	margin: 5pt;
+}
+.button:hover{
+	background-color: #111;
+	cursor: pointer;
+}
