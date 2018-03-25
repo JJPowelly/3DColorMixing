@@ -1,6 +1,3 @@
-# Jake Mayeux
-# July 2017
-# reorder.py
 
 import re
 import sys
